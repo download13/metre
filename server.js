@@ -18,8 +18,6 @@ var fs = require('fs');
 var sw = require('simpleware');
 var sse = require('./sse');
 
-var buzzard = require('./buzzard').createMiddleware('buzzard', 9781);
-
 var dataString = {};
 var conns = {};
 function setData(name, d) {
@@ -41,7 +39,7 @@ app.get(/\/stream\/([a-zA-Z0-9-_.]+)/, function(req, res) {
 	c.send(dataString[name]);
 });
 
-http.createServer(sw.mw([buzzard, app])).listen(80, function() {
+http.createServer(sw.mw([buzzard, app])).listen(8080, function() {
 	console.log('HTTP Listening');
 });
 
