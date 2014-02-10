@@ -36,7 +36,6 @@ app.get(/\/stream\/([a-zA-Z0-9-_.]+)/, function(req, res) {
 	var name = req.params[0];
 	var c = sse.createConnection(req, res);
 	setConns(name, c);
-	c.send(dataString[name]);
 });
 
 http.createServer(app).listen(8080, function() {
