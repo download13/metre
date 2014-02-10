@@ -1,0 +1,31 @@
+<!doctype html>
+<body>
+<div id="lines"></div>
+<script>
+// geoip-lite [optional]
+
+var count = 50;
+
+var stream = new EventSource('/stream/buzzard');
+stream.onmessage = function(e) {
+	// TODO: Show the data on the dashboard
+	var data = JSON.parse(e.data);
+	Object.keys(data).map(function(path) {
+		var d = data[path]
+		d.path = path;
+		return d;
+	}).sort(function(a, b) {
+		return b.meter['1MinuteRate'] - a.meter['1MinuteRate'];
+	}).slice(0, count).forEach(function(item, i) {
+		var s = item.path + ' ' + item.meter['1MinuteRate'] + 'rps ' + item.histogram.median + 'ms';
+		lines.children[i].textContent = s;
+		console.log(item);
+	});
+}
+
+var lines = document.getElementById('lines');
+for(var i = 0; i < count; i++) {
+	lines.appendChild(document.createElement('pre'));
+}
+</script>
+</body>
