@@ -6,7 +6,7 @@
 
 var count = 50;
 
-var stream = new EventSource('/stream/buzzard');
+var stream = new EventSource('/stream/' + prompt('Listen to'));
 stream.onmessage = function(e) {
 	// TODO: Show the data on the dashboard
 	var data = JSON.parse(e.data);
