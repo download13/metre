@@ -39,7 +39,7 @@ app.get(/\/stream\/([a-zA-Z0-9-_.]+)/, function(req, res) {
 	c.send(dataString[name]);
 });
 
-http.createServer(sw.mw([buzzard, app])).listen(8080, function() {
+http.createServer(app).listen(8080, function() {
 	console.log('HTTP Listening');
 });
 
