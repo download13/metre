@@ -57,4 +57,8 @@ net.createServer(function(c) {
 			c.send(dataString[name]);
 		});
 	});
+	c.on('error', function(err) {
+		console.log(err);
+		c.destroy();
+	});
 }).listen(9781);
