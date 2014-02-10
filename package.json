@@ -1,5 +1,5 @@
 {
-  "name": "buzzard",
+  "name": "buzzard-metrics",
   "version": "0.0.0",
   "description": "Metrics",
   "main": "buzzard.js",

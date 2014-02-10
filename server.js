@@ -41,7 +41,9 @@ app.get(/\/stream\/([a-zA-Z0-9-_.]+)/, function(req, res) {
 	c.send(dataString[name]);
 });
 
-http.createServer(sw.mw([buzzard, app])).listen(80);
+http.createServer(sw.mw([buzzard, app])).listen(80, function() {
+	console.log('HTTP Listening');
+});
 
 var server = net.createServer(function(c) {
 	c.setEncoding('utf8');
@@ -65,4 +67,6 @@ var server = net.createServer(function(c) {
 server.on('error', function(err) {
 	console.log(err);
 	server.close();
-}).listen(9781);
+}).listen(9781, function() {
+	console.log('TCP Listening');
+});
