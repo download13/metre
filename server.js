@@ -46,7 +46,8 @@ http.createServer(app).listen(8080, function() {
 var server = net.createServer(function(c) {
 	c.setEncoding('utf8');
 	c.on('readable', function() {
-		var packet = c.read('utf8');
+		var length = parseInt(c.read(8), 16);
+		var packet = c.read(length);
 		var bp = packet.indexOf('/');
 		var name = packet.substr(0, bp);
 		var data = packet.substr(bp + 1);

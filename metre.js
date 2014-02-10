@@ -27,6 +27,9 @@ function SharedCollection(name, port, host) {
 SharedCollection.prototype = {
 	send: function() {
 		var data = this.name + '/' + JSON.stringify(this.stats);
+		var len = sdata.length.toString(16);
+		while(len.length < 8) len = '0' + len;
+		data = len + data;
 		var s = this.socket;
 		var q = this.queue;
 		if(s) {
