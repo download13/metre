@@ -9,7 +9,12 @@ var count = 50;
 var stream = new EventSource('/stream/' + prompt('Listen to'));
 stream.onmessage = function(e) {
 	// TODO: Show the data on the dashboard
-	var data = JSON.parse(e.data);
+	try {
+		var data = JSON.parse(e.data);
+	} catch(err) {
+		console.log('Error parsing', e.data);
+		return;
+	}
 	Object.keys(data).map(function(path) {
 		var d = data[path]
 		d.path = path;
