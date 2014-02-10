@@ -43,7 +43,7 @@ app.get(/\/stream\/([a-zA-Z0-9-_.]+)/, function(req, res) {
 
 http.createServer(sw.mw([buzzard, app])).listen(80);
 
-net.createServer(function(c) {
+var server = net.createServer(function(c) {
 	c.setEncoding('utf8');
 	c.on('readable', function() {
 		var packet = c.read('utf8');
@@ -61,4 +61,8 @@ net.createServer(function(c) {
 		console.log(err);
 		c.destroy();
 	});
+});
+server.on('error', function(err) {
+	console.log(err);
+	server.close();
 }).listen(9781);
