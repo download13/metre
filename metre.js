@@ -17,6 +17,10 @@ function SharedCollection(name, port, host) {
 	var s = net.createConnection(port, host, function() {
 		self.socket = s;
 	});
+	s.on('error', function() {
+		s.destroy();
+		self.socket = null;
+	});
 
 	setInterval(this.send.bind(this), 1000);
 }
@@ -26,12 +30,7 @@ SharedCollection.prototype = {
 		var s = this.socket;
 		var q = this.queue;
 		if(s) {
-			while(q.length > 0) {
-				s.write(q.shift());
-			}
 			s.write(data);
-		} else {
-			q.push(data);
 		}
 	}
 };

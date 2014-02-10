@@ -1,8 +1,8 @@
 {
-  "name": "buzzard-metrics",
+  "name": "metre",
   "version": "0.0.0",
   "description": "Metrics",
-  "main": "buzzard.js",
+  "main": "metre.js",
   "dependencies": {
     "measured": "~0.1.3",
     "simpleware": "~0.2.2"
